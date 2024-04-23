@@ -5,7 +5,7 @@ https://lecture-sheduling-frontend.vercel.app/login
 
 ## Instructions
 Admin Login
-username: admin
+username: admin -
 password: admin
 
 ## Getting Started
