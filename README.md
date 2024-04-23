@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Description 
+I've crafted an admin panel utilizing Next.js with TypeScript, SCSS, and Tailwind CSS, accentuated with the modern aesthetics of the Shadow UI library. It's meticulously engineered to be fully responsive, ensuring smooth operation across all devices, from desktops and laptops to tablets and mobile phones, including smaller screens. The design prioritizes user experience, offering intuitive navigation and a clean interface for seamless management. Leveraging Tailwind CSS, the panel boasts a sleek and modern appearance while maintaining flexibility and scalability. This project empowers administrators with efficient control and management capabilities, providing a comprehensive solution for all their needs.
+
 ## Demo
 https://lecture-sheduling-frontend.vercel.app/login
 
