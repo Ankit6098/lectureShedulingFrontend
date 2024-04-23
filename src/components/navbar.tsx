@@ -111,7 +111,7 @@ export default function Navbar({ path }: any) {
                       href="/courses"
                       className="flex gap-2 hover:underline"
                     >
-                      <span>Catalogs</span>
+                      <span>Courses</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="15"
@@ -130,7 +130,7 @@ export default function Navbar({ path }: any) {
                       href="/lectures"
                       className="flex gap-2 hover:underline"
                     >
-                      <span>Services</span>
+                      <span>Lectures</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="15"
@@ -149,7 +149,7 @@ export default function Navbar({ path }: any) {
                       href="/assignLectures"
                       className="flex gap-2 hover:underline"
                     >
-                      <span>Offer / Coupons</span>
+                      <span>Assign Bookings</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="15"
