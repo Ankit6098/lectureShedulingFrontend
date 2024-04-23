@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Demo
+https://lecture-sheduling-frontend.vercel.app/login
+
+## Instructions
+Admin Login
+username: admin -
+password: admin
+
 ## Getting Started
 
 First, run the development server:
