@@ -470,7 +470,7 @@ export default function Course() {
           />
           <div className="flex items-center gap-2">
             <Dialog>
-              <Tooltip showArrow={true} content="Create Catalog">
+              <Tooltip showArrow={true} content="Add Courses">
                 <DialogTrigger asChild>
                   <Button className="text-xl rounded-xl bg-slate-800 ml-2">
                     +

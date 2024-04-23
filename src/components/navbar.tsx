@@ -8,10 +8,12 @@ import { LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function Navbar({ path }: any) {
   const router = useRouter();
+  const params = useParams();
+
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const handleSheetToggle = () => {
     setIsSheetOpen(!isSheetOpen);
@@ -22,6 +24,7 @@ export default function Navbar({ path }: any) {
     localStorage.removeItem("isLoggedIn");
     router.push("/login");
   };
+
   return (
     <div className={`${styles.navabrContainer} border-b-2`}>
       <div className={styles.navbarInnerContainer}>
@@ -29,21 +32,51 @@ export default function Navbar({ path }: any) {
           <div className={`${styles.weblogo} flex items-center`}>
             <span className="text-xl font-bold">ADMIN</span>
           </div>
-          <div className={`${styles.navbarControllers} flex flex-wrap gap-4`}>
+          <div className={`${styles.navbarControllers} flex flex-wrap gap-1`}>
             <Link href="/">
-              <span className="font-normal text-sm">Overview</span>
+              <span
+                className={`font-normal text-sm p-2 px-3 rounded-xl ${
+                  params.id === undefined ? "shadow-md" : " "
+                }`}
+              >
+                Overview
+              </span>
             </Link>
             <Link href="/users">
-              <span className="font-normal text-sm">Users</span>
+              <span
+                className={`font-normal text-sm p-2 px-3 rounded-xl ${
+                  params.id === "users" ? "shadow-md" : " "
+                }`}
+              >
+                Users
+              </span>
             </Link>
             <Link href="/courses">
-              <span className="font-normal text-sm">Courses</span>
+              <span
+                className={`font-normal text-sm p-2 px-3 rounded-xl ${
+                  params.id === "courses" ? "shadow-md" : " "
+                }`}
+              >
+                Courses
+              </span>
             </Link>
             <Link href="/lectures">
-              <span className="font-normal text-sm">Lectures</span>
+              <span
+                className={`font-normal text-sm p-2 px-3 rounded-xl ${
+                  params.id === "lectures" ? "shadow-md" : " "
+                }`}
+              >
+                Lectures
+              </span>
             </Link>
             <Link href="/assignLectures">
-              <span className="font-normal text-sm">Assign Lectures</span>
+              <span
+                className={`font-normal text-sm p-2 px-3 rounded-xl ${
+                  params.id === "assignLectures" ? "shadow-md" : " "
+                }`}
+              >
+                Assign Lectures
+              </span>
             </Link>
           </div>
         </div>
