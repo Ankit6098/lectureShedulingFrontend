@@ -487,7 +487,7 @@ export default function Lecture() {
       )}
       <div className={`${styles.serviceTableContainer} w-[70%] mx-auto mt-14`}>
         <div className="pageHeading">
-          <span className="text-xl font-semibold">Services</span>
+          <span className="text-xl font-semibold">Lectures</span>
         </div>
         <div className={`${styles.tableControllers} flex justify-between py-4`}>
           <div className="flex gap-2">

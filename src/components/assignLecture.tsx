@@ -363,7 +363,7 @@ export default function AssignLecture() {
     <>
       <div className={`${styles.offerTableContainer} w-[70%] mx-auto mt-14`}>
         <div className="pageHeading">
-          <span className="text-xl font-semibold">Offers / Counpons</span>
+          <span className="text-xl font-semibold">Assign Lectures</span>
         </div>
         <div className={`${styles.tableControllers} flex justify-between py-4`}>
           <div className="flex gap-2">

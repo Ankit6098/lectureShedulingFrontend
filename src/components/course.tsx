@@ -457,7 +457,7 @@ export default function Course() {
       )}
       <div className={`${styles.catalogTableContainer} w-[70%] mx-auto mt-14`}>
         <div className="pageHeading">
-          <span className="text-xl font-semibold">Catalogs</span>
+          <span className="text-xl font-semibold">Courses</span>
         </div>
         <div className="flex justify-between py-4">
           <Input
