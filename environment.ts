@@ -3,7 +3,7 @@ const developement = {
 }
 
 const production = {
-    url: "https://lectureshedulingbackend.onrender.com"
+    url: "https://lectureshedulingbackend.onrender.com/"
 }
 
 export default production;
