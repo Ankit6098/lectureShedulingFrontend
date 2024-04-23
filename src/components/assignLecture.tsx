@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
-import styles from "../app/styles/offer.module.scss";
+import styles from "../app/styles/assignLectures.module.scss";
 import url from "../../environment";
 
 import {

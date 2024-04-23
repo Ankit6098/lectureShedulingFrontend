@@ -9,7 +9,7 @@ import { Tooltip } from "@nextui-org/react";
 import { toast } from "sonner";
 import { AiOutlineDelete } from "react-icons/ai";
 import Image from "next/image";
-import styles from "../app/styles/catalog.module.scss";
+import styles from "../app/styles/course.module.scss";
 
 import {
   Dialog,
@@ -188,14 +188,14 @@ export default function Course() {
       accessorKey: "level",
       header: "Level",
       cell: ({ row }) => (
-        <div className="w-[100px]">{row.getValue("level")}</div>
+        <div className="w-[50px]">{row.getValue("level")}</div>
       ),
     },
     {
       accessorKey: "description",
       header: "Description",
       cell: ({ row }) => (
-        <div className="w-[300px]">{row.getValue("description")}</div>
+        <div className="w-[350px]">{row.getValue("description")}</div>
       ),
     },
     {

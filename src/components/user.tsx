@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import { Separator } from "@/components/ui/separator";
 import styles from "../app/styles/user.module.scss";
-import url from '../../environment'
+import url from "../../environment";
 
 import {
   CaretSortIcon,
@@ -53,6 +53,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Tooltip } from "@nextui-org/tooltip";
+import { toast } from "sonner";
 
 export type Payment = {
   _id: string;
@@ -133,16 +142,81 @@ export const columns: ColumnDef<Payment>[] = [
 
 export default function User() {
   const params = useParams();
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState<any[]>([]);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleInputChange = (e: any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFormSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      // Check if any key in formData is empty and track the missing fields
+      const missingFields: string[] = [];
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value === "") {
+          missingFields.push(key);
+        }
+      });
+
+      if (missingFields.length > 0) {
+        // Show error message with the names of missing fields
+        toast.error(
+          `Please fill in the following fields: ${missingFields.join(", ")}`,
+          {
+            position: "top-right",
+          }
+        );
+        return;
+      }
+
+      const response = await axios.post(
+        `${url.url}admin/createUser`,
+        formData
+      );
+      if (response.status === 200) {
+        // update the state
+        const data = response.data.user;
+        // Add id and createdAt fields to formData
+        const updatedFormData = {
+          ...formData,
+          _id: data._id,
+          createdAt: data.createdAt,
+          updatedAt: data.updatedAt,
+        };
+        setUserData((prevData) => [...prevData, updatedFormData]);
+
+        toast("Service Created Successfully", {
+          action: {
+            label: "Undo",
+            onClick: () => console.log("Undo"),
+          },
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      console.error("Error in creating catalog:", error);
+      toast.error("Failed to create service", {
+        position: "top-right",
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const response = await axios.get(
-          `${url.url}admin/getAllUsers`
-        );
+        const response = await axios.get(`${url.url}admin/getAllUsers`);
         if (response.status === 200) {
-          console.log(response.data.user)
+          console.log(response.data.user);
           setUserData(response.data.user);
         }
       } catch (error) {
@@ -196,9 +270,9 @@ export default function User() {
     <>
       <div className={`${styles.userTableContainer} w-[70%] mx-auto mt-14`}>
         <div className="pageHeading">
-          <span className="text-xl font-semibold">Users</span>
+          <span className="text-xl font-semibold">Instructors</span>
         </div>
-        <div className="flex items-center py-4">
+        <div className={`${styles.tableControllers} flex justify-between py-4`}>
           <div className="flex gap-2">
             <div className="w-[210px]">
               <Select
@@ -253,32 +327,83 @@ export default function User() {
               />
             )}
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-2 sm:ml-auto">
-                Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="flex items-center gap-2 justify-end">
+            <Dialog>
+              <Tooltip showArrow={true} content="Add Instructor">
+                <DialogTrigger asChild>
+                  <Button className="text-xl rounded-xl bg-slate-800 ml-2">
+                    +
+                  </Button>
+                </DialogTrigger>
+              </Tooltip>
+              <DialogContent className="sm:w-[425px] w-[350px]">
+                <DialogHeader className="text-start">
+                  <DialogTitle>Add Instructor</DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="w-11/12 flex flex-col gap-3 mx-auto">
+                    <div className="w-full">
+                      <Input
+                        name="name"
+                        placeholder="Name"
+                        className="col-span-3"
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <div className="w-full">
+                      <Input
+                        name="email"
+                        placeholder="Email"
+                        className="col-span-3"
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <div className="w-full">
+                      <Input
+                        type="Number"
+                        name="phone"
+                        placeholder="Phone"
+                        className="col-span-3"
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full flex justify-end">
+                    <Button type="submit">Submit</Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="ml-2 sm:ml-auto">
+                  Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                    return (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {column.id}
+                      </DropdownMenuCheckboxItem>
+                    );
+                  })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
         <div className={` ${styles.table} rounded-md border`}>
           <Table>

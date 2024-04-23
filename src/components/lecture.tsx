@@ -7,7 +7,7 @@ import { Tooltip } from "@nextui-org/react";
 import { toast } from "sonner";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Edit } from "lucide-react";
-import styles from "../app/styles/service.module.scss";
+import styles from "../app/styles/lecture.module.scss";
 import url from "../../environment";
 
 import {
@@ -195,7 +195,7 @@ export default function Lecture() {
       accessorKey: "description",
       header: "Description",
       cell: ({ row }) => (
-        <div className="w-[300px]">{row.getValue("description")}</div>
+        <div className="w-[450px]">{row.getValue("description")}</div>
       ),
     },
     {
@@ -410,7 +410,6 @@ export default function Lecture() {
         setServiceData((prevData) => [...prevData, updatedFormData]);
 
         toast("Service Created Successfully", {
-          description: "Sunday, December 03, 2023 at 9:00 AM",
           action: {
             label: "Undo",
             onClick: () => console.log("Undo"),

@@ -6,4 +6,4 @@ const production = {
     url: "https://lectureshedulingbackend.onrender.com/"
 }
 
-export default developement;
+export default production;
