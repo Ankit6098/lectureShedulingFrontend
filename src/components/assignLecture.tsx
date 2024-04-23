@@ -287,7 +287,8 @@ export default function AssignLecture() {
   const handleFormSubmit = async (e: any) => {
     e.preventDefault();
 
-    const formattedDate = date.toLocaleDateString("en-GB");
+    // const formattedDate = date.toLocaleDateString("en-GB");
+    const formattedDate = date ? date.toLocaleDateString("en-GB") : "No date";
     formData.userName = instructor;
     formData.lectureId = lecture;
     formData.date = formattedDate;
